@@ -1,4 +1,4 @@
 package com.akdital.service.interfaces;
 
-public interface IDepartmentService {
+public interface PatientService {
 }

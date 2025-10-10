@@ -1,4 +1,4 @@
 package com.akdital.repository.interfaces;
 
-public interface IRoomRepository {
+public interface DepartmentRepository {
 }

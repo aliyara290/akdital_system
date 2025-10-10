@@ -32,6 +32,4 @@ public abstract class User {
     @NonNull
     @Column(name = "password", nullable = false)
     private String password;
-
-
 }

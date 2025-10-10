@@ -1,4 +1,4 @@
 package com.akdital.service.impl;
 
-public class ConsultationService {
+public class DepartmentServiceImpl {
 }

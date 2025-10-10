@@ -15,23 +15,31 @@ import java.time.*;
 public class Consultation {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column (name = "consultation_id", unique = true)
+    @Column(name = "consultation_id", unique = true)
     private String consultationId;
-    @Column (name = "date")
+
+    @Column(name = "date")
     private LocalDate date;
-    @Column (name = "time")
+
+    @Column(name = "time")
     private LocalTime time;
-    @Column (name = "consultation_status")
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "consultation_status", nullable = false)
     private ConsultationStatus consultationStatus;
-    @Column (name = "raport")
+
+    @Column(name = "raport")
     private String raport;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id")
     private Patient patient;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
 }

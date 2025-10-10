@@ -1,4 +1,4 @@
 package com.akdital.service.impl;
 
-public class PatientService {
+public class PatientServiceImpl {
 }
