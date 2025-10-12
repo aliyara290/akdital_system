@@ -17,9 +17,11 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "department_id", unique = true)
     private String departmentId;
+
     @NonNull
     @Column(name = "name")
     private String name;
-    private List<Doctor> doctors;
 
+
+    private List<Doctor> doctors;
 }

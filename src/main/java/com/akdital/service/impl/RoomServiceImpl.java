@@ -11,7 +11,6 @@ import java.util.List;
 
 @ApplicationScoped
 public class RoomServiceImpl implements RoomService {
-
     @Inject
     private RoomRepository roomRepository;
 
@@ -49,7 +48,7 @@ public class RoomServiceImpl implements RoomService {
     public List<Room> getAllRooms() {
         List<Room> rooms = roomRepository.getAll();
         if (rooms.isEmpty()) {
-            return rooms;
-        } else return List.of();
+            return List.of();
+        } else return rooms;
     }
 }

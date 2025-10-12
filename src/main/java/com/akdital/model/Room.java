@@ -11,6 +11,7 @@ import java.util.*;
 //@AllArgsConstructor
 //@Setter
 //@Getter
+
 @Entity
 @Table(name = "rooms")
 public class Room {

@@ -25,6 +25,4 @@ public class Doctor extends User {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Consultation> consultationList;
 
-
-
 }
