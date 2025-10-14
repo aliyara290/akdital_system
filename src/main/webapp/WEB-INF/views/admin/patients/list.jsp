@@ -161,7 +161,6 @@
             <div class="col-span-full bg-white rounded-lg shadow-lg p-12 text-center">
                 <i class="fas fa-door-closed text-6xl text-gray-300 mb-4"></i>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">No Patients Found!</h3>
-                <p class="text-gray-600 mb-4">Create new patient!</p>
                 <a href="<%= request.getContextPath() %>/admin/patients/new"
                    class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
                     <i class="fas fa-plus mr-2"></i>Add New Patient

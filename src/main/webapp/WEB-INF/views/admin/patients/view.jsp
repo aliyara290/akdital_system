@@ -3,6 +3,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Optional<Patient> patient = (Optional<Patient>) request.getAttribute("patient");
+    if (patient == null || patient.isEmpty()) {
+        patient = Optional.empty();
+    }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,14 +35,14 @@
                             </div>
                             <div>
                                 <h2 class="text-3xl font-bold text-gray-800"><%= patient.get().getFirstName() %> <%= patient.get().getFirstName() %></h2>
-                                <p class="text-gray-600">Patient ID: <%= patient.get().getPatientId() %></p>
+                                <p class="text-gray-600">Patient ID: <%= patient.get().getUserId().substring(0, 8) %></p>
 <%--                                <span class="inline-block mt-2 px-3 py-1 bg-green-100 text-green-800 text-sm font-semibold rounded-full">--%>
 <%--                                        Active--%>
 <%--                                    </span>--%>
                             </div>
                         </div>
                         <div class="flex gap-2">
-                            <a href="<%= request.getContextPath() %>/admin/patients/edit/<%= patient.get().getPatientId() %>"
+                            <a href="<%= request.getContextPath() %>/admin/patients/edit/<%= patient.get().getUserId() %>"
                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition-colors">
                                 <i class="fas fa-edit mr-2"></i>Edit
                             </a>

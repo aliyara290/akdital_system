@@ -2,14 +2,11 @@ package com.akdital.model;
 
 import com.akdital.model.enums.ConsultationStatus;
 import jakarta.persistence.*;
-import lombok.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
+
 @Entity
 @Table(name = "consultations")
 public class Consultation {
@@ -19,27 +16,108 @@ public class Consultation {
     private String consultationId;
 
     @Column(name = "date")
+    @NotBlank(message = "Date is required!")
     private LocalDate date;
 
     @Column(name = "time")
+    @NotBlank(message = "Time is required!")
     private LocalTime time;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "consultation_status", nullable = false)
     private ConsultationStatus consultationStatus;
 
-    @Column(name = "raport")
+    @Column(name = "raport", nullable = true)
     private String raport;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id")
+    @NotBlank(message = "Patient id is required")
     private Patient patient;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id")
+    @NotBlank(message = "Doctor id is required")
     private Doctor doctor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
+    @NotBlank(message = "Room id is required")
     private Room room;
+
+    public Consultation() {}
+
+    public Consultation(ConsultationStatus consultationStatus, LocalDate date, Doctor doctor, Patient patient, String raport, Room room, LocalTime time) {
+        this.consultationStatus = consultationStatus;
+        this.date = date;
+        this.doctor = doctor;
+        this.patient = patient;
+        this.raport = raport;
+        this.room = room;
+        this.time = time;
+    }
+
+    public String getConsultationId() {
+        return consultationId;
+    }
+
+    public void setConsultationId(String consultationId) {
+        this.consultationId = consultationId;
+    }
+
+    public ConsultationStatus getConsultationStatus() {
+        return consultationStatus;
+    }
+
+    public void setConsultationStatus(ConsultationStatus consultationStatus) {
+        this.consultationStatus = consultationStatus;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public String getRaport() {
+        return raport;
+    }
+
+    public void setRaport(String raport) {
+        this.raport = raport;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
 }

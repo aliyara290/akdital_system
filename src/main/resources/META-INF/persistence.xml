@@ -5,18 +5,33 @@
              version="3.0">
     <persistence-unit name="UserPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Explicitly list all entity classes -->
         <class>com.akdital.model.Room</class>
         <class>com.akdital.model.User</class>
+        <class>com.akdital.model.Patient</class>
+        <class>com.akdital.model.Doctor</class>
+        <class>com.akdital.model.Consultation</class>
+        <class>com.akdital.model.Department</class>
+
+        <!-- Exclude unlisted classes -->
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
         <properties>
+            <!-- Database connection properties -->
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:postgresql://localhost:5432/akdital_db"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/akidatl_db"/>
             <property name="jakarta.persistence.jdbc.user" value="aliyara29"/>
             <property name="jakarta.persistence.jdbc.password" value="Yara2001"/>
+
+            <!-- Hibernate properties -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
+
+            <!-- Additional properties to help with class loading -->
+            <property name="hibernate.archive.autodetection" value="class"/>
         </properties>
     </persistence-unit>
 </persistence>
