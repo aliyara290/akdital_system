@@ -1,4 +1,4 @@
-.PHONY: start stop restart clean clean-compose logs pjadmin status
+.PHONY: start stop restart clean clean-compose logs pgadmin status
 
 start:
 	docker compose up -d
@@ -18,7 +18,7 @@ clean-compose:
 logs:
 	docker compose logs -f
 
-pjadmin:
+pgadmin:
 	open http://localhost:8081
 
 status:
