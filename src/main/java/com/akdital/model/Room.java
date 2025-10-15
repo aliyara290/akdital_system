@@ -1,16 +1,9 @@
 package com.akdital.model;
 
-import com.akdital.service.interfaces.RoomService;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.*;
-
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Setter
-//@Getter
 
 @Entity
 @Table(name = "rooms")
@@ -28,10 +21,9 @@ public class Room {
     public Room() {
     }
 
-    public Room(String name, List<LocalDateTime> occupiedSlots, String roomId) {
+    public Room(String name) {
         this.name = name;
         this.occupiedSlots = new ArrayList<>();
-        this.roomId = roomId;
     }
 
     public String getName() {

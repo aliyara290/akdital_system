@@ -3,17 +3,15 @@ package com.akdital.repository.impl;
 import com.akdital.model.Department;
 import com.akdital.repository.interfaces.GenericRepository;
 import com.akdital.util.JPAUtil;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
 
     private final Class<T> entity;
+//    public GenericRepositoryImpl() {}
 
     public GenericRepositoryImpl(Class<T> entity) {
         this.entity = entity;
@@ -47,6 +45,7 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
         try {
             tx.begin();
             em.merge(t);
+            System.out.println("lllllllllllllll");
             tx.commit();
             return t;
         } catch (Exception ex) {
@@ -55,12 +54,13 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
             }
             throw new RuntimeException("Error updating entity", ex);
         } finally {
-            JPAUtil.close(em);
+            //JPAUtil.close(em);
         }
     }
 
+
     @Override
-    public boolean delete(String id) {
+    public Boolean delete(String id) {
         EntityManager em = JPAUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -72,7 +72,7 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
                 return true;
             } else {
                 tx.rollback();
-                return false;
+                return null;
             }
         } catch (Exception ex) {
             if (tx.isActive()) {
@@ -87,20 +87,13 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
     @Override
     public Optional<T> findById(String id) {
         EntityManager em = JPAUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
         try {
-            tx.begin();
             T entity = em.find(this.entity, id);
             if (entity != null) {
-                tx.commit();
                 return Optional.of(entity);
             }
-            tx.rollback();
             return Optional.empty();
         } catch (Exception ex) {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
             throw new RuntimeException("Error finding entity", ex);
         } finally {
             JPAUtil.close(em);
@@ -110,20 +103,13 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
     @Override
     public Optional<T> findByName(String name) {
         EntityManager em = JPAUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
         try {
-            tx.begin();
             T entity = em.find(this.entity, name);
             if (entity != null) {
-                tx.commit();
                 return Optional.of(entity);
             }
-            tx.rollback();
             return Optional.empty();
         } catch (Exception ex) {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
             throw new RuntimeException("Error finding entity", ex);
         } finally {
             JPAUtil.close(em);
@@ -152,31 +138,7 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
 //            JPAUtil.close(em);
 //        }
 //    }
-
-    @Override
-    public Optional<T> findByEmail(String email) {
-        EntityManager em = JPAUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            T entity = em.find(this.entity, email);
-            if (entity != null) {
-                tx.commit();
-                return Optional.of(entity);
-            }
-            tx.rollback();
-            return Optional.empty();
-        } catch (Exception ex) {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            throw new RuntimeException("Error finding entity", ex);
-        } finally {
-            JPAUtil.close(em);
-        }
-    }
 }
-
 
 
 

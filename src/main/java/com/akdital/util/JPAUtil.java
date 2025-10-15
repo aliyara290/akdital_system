@@ -6,9 +6,21 @@ import jakarta.persistence.Persistence;
 
 public class JPAUtil {
 
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("UserPU");
+    private static EntityManagerFactory emf;
+
+    static {
+        try {
+            emf = Persistence.createEntityManagerFactory("UserPU");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ExceptionInInitializerError(e);
+        }
+    }
 
     public static EntityManager getEntityManager() {
+        if (emf == null) {
+            throw new IllegalStateException("EntityManagerFactory is not initialized");
+        }
         return emf.createEntityManager();
     }
 
