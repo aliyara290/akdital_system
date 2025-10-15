@@ -1,6 +1,10 @@
+<%@ page import="javax.swing.text.html.Option" %>
+<%@ page import="com.akdital.model.Department" %>
+<%@ page import="java.util.Optional" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String departmentId = request.getParameter("id");
+    String departmentId = (String) request.getAttribute("departmentId");
+    Optional<Department> department = (Optional<Department> ) request.getAttribute("department");
     boolean isEdit = departmentId != null && !departmentId.isEmpty();
     String formTitle = isEdit ? "Edit Department" : "Add New Department";
 %>
@@ -34,7 +38,6 @@
                         <input type="hidden" name="departmentId" value="<%= departmentId %>">
                         <% } %>
 
-                        <!-- Department Information -->
                         <div class="mb-8">
                             <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
                                 <i class="fas fa-building text-blue-600 mr-2"></i>
@@ -47,7 +50,7 @@
                                 </label>
                                 <input type="text"
                                        name="name"
-                                       value="<%= isEdit ? "Cardiology" : "" %>"
+                                       value="<%= isEdit ? department.get().getName() : "" %>"
                                        required
                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                        placeholder="e.g., Cardiology, Neurology, Pediatrics">
@@ -64,20 +67,8 @@
                                 <textarea name="description"
                                           rows="4"
                                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                          placeholder="Brief description of the department's services and specialties"><%= isEdit ? "Specialized in heart and vascular care" : "" %></textarea>
+                                          placeholder="Brief description of the department's services and specialties"><%= isEdit ? department.get().getDescription() : "" %></textarea>
                             </div>
-
-                            <% if (isEdit) { %>
-                            <div class="mb-6">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Department ID
-                                </label>
-                                <input type="text"
-                                       value="<%= departmentId %>"
-                                       disabled
-                                       class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-600 cursor-not-allowed">
-                            </div>
-                            <% } %>
                         </div>
 
                         <!-- Form Actions -->

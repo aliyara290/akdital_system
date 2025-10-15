@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +23,7 @@
 
         <div class="p-6">
             <div class="max-w-6xl mx-auto">
-                <!-- Department Header -->
+
                 <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg p-8 text-white mb-6">
                     <div class="flex justify-between items-start">
                         <div class="flex items-center">
@@ -30,15 +31,15 @@
                                 <i class="fas fa-heartbeat text-5xl"></i>
                             </div>
                             <div>
-                                <h2 class="text-4xl font-bold mb-2">Cardiology</h2>
-                                <p class="text-blue-100">Heart & Vascular Care Specialist</p>
+                                <h2 class="text-4xl font-bold mb-2"><c:out value="${department.get().getName()}" /></h2>
+                                <p class="text-blue-100"><c:out value="${department.get().getDescription()}" /></p>
                                 <span class="inline-block mt-2 bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
-                                        Department ID: #DEPT001
+                                        Department ID: #<c:out value="${department.get().getDepartmentId().substring(0, 8)}" />
                                     </span>
                             </div>
                         </div>
                         <div class="flex gap-2">
-                            <a href="<%= request.getContextPath() %>/admin/departments/edit/1"
+                            <a href="<%= request.getContextPath() %>/admin/departments/edit/<c:out value="${department.get().getDepartmentId()}" />"
                                class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded-lg transition-colors">
                                 <i class="fas fa-edit mr-2"></i>Edit
                             </a>
@@ -57,7 +58,7 @@
                             <p class="text-gray-600 text-sm">Total Doctors</p>
                             <i class="fas fa-user-md text-blue-600 text-2xl"></i>
                         </div>
-                        <h4 class="text-3xl font-bold text-gray-800">18</h4>
+                        <h4 class="text-3xl font-bold text-gray-800">0</h4>
                         <p class="text-sm text-green-600 mt-1">
                             <i class="fas fa-arrow-up"></i> 2 new this month
                         </p>
@@ -67,7 +68,7 @@
                             <p class="text-gray-600 text-sm">Total Patients</p>
                             <i class="fas fa-users text-green-600 text-2xl"></i>
                         </div>
-                        <h4 class="text-3xl font-bold text-gray-800">245</h4>
+                        <h4 class="text-3xl font-bold text-gray-800">0</h4>
                         <p class="text-sm text-green-600 mt-1">
                             <i class="fas fa-arrow-up"></i> 15% growth
                         </p>

@@ -18,58 +18,12 @@ public class PatientRepositoryImpl extends GenericRepositoryImpl<Patient> implem
         super(Patient.class);
     }
 
-
-    @Override
-    public Patient save(Patient patient) {
-        try {
-            return super.save(patient);
-        } catch (Exception ex) {
-            throw new DataInsertionException("Failed to insert patient into database!", ex);
-        }
-    }
-
-    @Override
-    public Patient update(Patient patient) {
-        try {
-            return super.update(patient);
-        } catch (Exception ex) {
-            throw new DataUpdateException("Failed to update patient!", ex);
-        }
-    }
-
-    @Override
-    public Boolean delete(String id) {
-        try {
-            return super.delete(id);
-        } catch (Exception ex) {
-            throw new DataDeletionException("Failed to delete patient!", ex);
-        }
-    }
-
-    @Override
-    public Optional<Patient> findByName(String name) {
-        try {
-        return super.findByName(name);
-        } catch (Exception ex) {
-            throw new NoRecordsFound("Patient not found!", ex);
-        }
-    }
-
-    @Override
-    public Optional<Patient> findById(String id) {
-        try {
-            return super.findById(id);
-        } catch (Exception ex) {
-            throw new NoRecordsFound("Patient not found!", ex);
-        }
-    }
-
     @Override
     public List<Patient> getAllPatients() {
         try (EntityManager em = JPAUtil.getEntityManager()) {
             return em.createQuery("SELECT d FROM Patient d", Patient.class).getResultList();
         } catch (Exception ex) {
-            throw new NoRecordsFound("No doctors found!");
+            throw new NoRecordsFound("No patients found!");
         }
     }
 
@@ -88,7 +42,7 @@ public class PatientRepositoryImpl extends GenericRepositoryImpl<Patient> implem
         try {
         return List.of();
         } catch (Exception ex) {
-            throw new NoRecordsFound("No patients to show!");
+            throw new NoRecordsFound("No consultations found!");
         }
     }
 }

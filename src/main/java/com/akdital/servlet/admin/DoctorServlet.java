@@ -16,23 +16,18 @@ public class DoctorServlet extends HttpServlet {
         String pathInfo = req.getPathInfo();
 
         if (pathInfo == null || pathInfo.equals("/")) {
-            // List all doctors
             req.getRequestDispatcher("/WEB-INF/views/admin/doctors/list.jsp").forward(req, resp);
         } else if (pathInfo.equals("/new")) {
-            // Show create form
             req.getRequestDispatcher("/WEB-INF/views/admin/doctors/form.jsp").forward(req, resp);
         } else if (pathInfo.startsWith("/edit/")) {
-            // Show edit form
             String doctorId = pathInfo.substring(6);
             req.setAttribute("doctorId", doctorId);
             req.getRequestDispatcher("/WEB-INF/views/admin/doctors/form.jsp").forward(req, resp);
         } else if (pathInfo.startsWith("/view/")) {
-            // View doctor details
             String doctorId = pathInfo.substring(6);
             req.setAttribute("doctorId", doctorId);
             req.getRequestDispatcher("/WEB-INF/views/admin/doctors/view.jsp").forward(req, resp);
         } else if (pathInfo.startsWith("/delete/")) {
-            // Delete doctor - redirect back to list
             resp.sendRedirect(req.getContextPath() + "/admin/doctors/?success=deleted");
         }
     }

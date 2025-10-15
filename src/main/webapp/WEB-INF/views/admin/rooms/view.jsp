@@ -1,7 +1,8 @@
 <%@ page import="com.akdital.model.Room" %>
+<%@ page import="java.util.Optional" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    Room room = (Room) request.getAttribute("room");
+    Optional<Room> room = (Optional<Room>) request.getAttribute("room");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,15 +35,15 @@
                                 <i class="fas fa-door-open text-4xl text-purple-600"></i>
                             </div>
                             <div>
-                                <h2 class="text-3xl font-bold text-gray-800"><%= room.getName() %></h2>
-                                <p class="text-gray-600 mt-1">Room ID: <span class="font-mono"><%= room.getRoomId() %></span></p>
+                                <h2 class="text-3xl font-bold text-gray-800"><%= room.get().getName() %></h2>
+                                <p class="text-gray-600 mt-1">Room ID: <span class="font-mono"><%= room.get().getRoomId().substring(0, 8) %></span></p>
                                 <span class="inline-block mt-2 px-3 py-1 bg-green-100 text-green-800 text-sm font-semibold rounded-full">
                                         <i class="fas fa-check-circle"></i> Available
                                     </span>
                             </div>
                         </div>
                         <div class="flex gap-2">
-                            <a href="<%= request.getContextPath() %>/admin/rooms/edit/<%= room.getRoomId() %>"
+                            <a href="<%= request.getContextPath() %>/admin/rooms/edit/<%= room.get().getRoomId() %>"
                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition-colors">
                                 <i class="fas fa-edit mr-2"></i>Edit
                             </a>
@@ -58,15 +59,15 @@
                             <p class="text-sm text-gray-600 mb-1">Room Name</p>
                             <p class="text-gray-900 font-medium text-lg">
                                 <i class="fas fa-door-closed text-purple-600 mr-2"></i>
-                                <%= room.getName() %>
+                                <%= room.get().getName() %>
                             </p>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-lg">
                             <p class="text-sm text-gray-600 mb-1">Occupied Slots</p>
                             <p class="text-gray-900 font-medium text-lg">
-                                <% if (room.getOccupiedSlots() != null && !room.getOccupiedSlots().isEmpty()) { %>
+                                <% if (room.get().getOccupiedSlots() != null && !room.get().getOccupiedSlots().isEmpty()) { %>
                                 <i class="fas fa-calendar-times text-orange-600 mr-2"></i>
-                                <%= room.getOccupiedSlots().size() %> slots
+                                <%= room.get().getOccupiedSlots().size() %> slots
                                 <% } else { %>
                                 <i class="fas fa-calendar-check text-green-600 mr-2"></i>
                                 No bookings

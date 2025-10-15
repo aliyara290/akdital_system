@@ -1,8 +1,9 @@
 <%@ page import="com.akdital.model.Room" %>
+<%@ page import="java.util.Optional" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    Room room = (Room) request.getAttribute("room");
-    boolean isEdit = room != null;
+    Optional<Room> room = (Optional<Room>) request.getAttribute("room");
+    boolean isEdit = room.isPresent();
     String formTitle = isEdit ? "Edit Room" : "Add New Room";
 %>
 <!DOCTYPE html>
@@ -29,7 +30,7 @@
                     <form action="<%= request.getContextPath() %>/admin/rooms/" method="post">
                         <input type="hidden" name="action" value="<%= isEdit ? "update" : "create" %>">
                         <% if (isEdit) { %>
-                        <input type="hidden" name="roomId" value="<%= room.getRoomId() %>">
+                        <input type="hidden" name="roomId" value="<%= room.get().getRoomId() %>">
                         <% } %>
 
                         <div class="mb-8">
@@ -44,31 +45,15 @@
                                 </label>
                                 <input type="text"
                                        name="name"
-                                       value="<%= isEdit ? room.getName() : "" %>"
+                                       value="<%= isEdit ? room.get().getName() : "" %>"
                                        required
                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                        placeholder="e.g., Room 101, Operating Theater A">
                                 <p class="mt-2 text-sm text-gray-600">
                                     <i class="fas fa-info-circle"></i>
-                                    Enter a unique and descriptive name for the room.
+                                    Enter a unique and descriptive name for the room.)
                                 </p>
                             </div>
-
-                            <% if (isEdit) { %>
-                            <div class="mb-6">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Room ID
-                                </label>
-                                <input type="text"
-                                       value="<%= room.getRoomId() %>"
-                                       disabled
-                                       class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-600 cursor-not-allowed">
-                                <p class="mt-2 text-sm text-gray-600">
-                                    <i class="fas fa-lock"></i>
-                                    Room ID cannot be changed.
-                                </p>
-                            </div>
-                            <% } %>
                         </div>
 
                         <div class="flex gap-4">

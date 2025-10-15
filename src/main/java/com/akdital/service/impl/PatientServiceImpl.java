@@ -1,20 +1,16 @@
 package com.akdital.service.impl;
 
-import com.akdital.exception.DataDeletionException;
-import com.akdital.exception.DataInsertionException;
-import com.akdital.exception.DataUpdateException;
-import com.akdital.exception.NoRecordsFound;
+import com.akdital.exception.*;
 import com.akdital.model.Patient;
 import com.akdital.repository.interfaces.PatientRepository;
 import com.akdital.service.interfaces.PatientService;
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class PatientServiceImpl implements PatientService {
 
-    private PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
 
     public PatientServiceImpl(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
@@ -33,6 +29,10 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient updatePatient(Patient patient) {
+        if(!patient.getPassword().isEmpty()) {
+            String hashedPassword = BCrypt.hashpw(patient.getPassword(), BCrypt.gensalt());
+            patient.setPassword(hashedPassword);
+        }
         try {
             return patientRepository.update(patient);
         } catch (Exception ex) {

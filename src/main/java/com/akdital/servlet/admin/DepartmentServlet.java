@@ -2,7 +2,6 @@ package com.akdital.servlet.admin;
 
 import com.akdital.model.Department;
 import com.akdital.repository.impl.DepartmentRepositoryImpl;
-import com.akdital.repository.impl.DoctorRepositoryImpl;
 import com.akdital.service.impl.DepartmentServiceImpl;
 import com.akdital.service.interfaces.DepartmentService;
 import jakarta.servlet.ServletException;
@@ -35,11 +34,14 @@ public class DepartmentServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/views/admin/departments/form.jsp").forward(req, resp);
         } else if (pathInfo.startsWith("/edit/")) {
             String departmentId = pathInfo.substring(6);
+            Optional<Department> department = departmentService.getDepartment(departmentId);
+            req.setAttribute("department", department);
             req.setAttribute("departmentId", departmentId);
             req.getRequestDispatcher("/WEB-INF/views/admin/departments/form.jsp").forward(req, resp);
         } else if (pathInfo.startsWith("/view/")) {
             String departmentId = pathInfo.substring(6);
-
+            Optional<Department> department = departmentService.getDepartment(departmentId);
+            req.setAttribute("department", department);
             req.getRequestDispatcher("/WEB-INF/views/admin/departments/view.jsp").forward(req, resp);
         } else if (pathInfo.startsWith("/delete/")) {
             String departmentId = pathInfo.substring(8);
@@ -54,7 +56,7 @@ public class DepartmentServlet extends HttpServlet {
         if ("create".equals(action)) {
             createDepartment(req, resp);
         } else if ("update".equals(action)) {
-            resp.sendRedirect(req.getContextPath() + "/admin/departments/?success=updated");
+            updateDepartment(req, resp);
         }
     }
 
@@ -69,7 +71,7 @@ public class DepartmentServlet extends HttpServlet {
         String dDescription = request.getParameter("description");
         if (dName == null || dName.trim().isEmpty() || dDescription == null || dDescription.trim().isEmpty()) {
             request.setAttribute("error", "All fields are required! Please fill them in.");
-            request.getRequestDispatcher("/admin/departments/new.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/admin/departments/form.jsp").forward(request, response);
             return;
         }
         Department department = new Department(dName, dDescription);
@@ -78,9 +80,38 @@ public class DepartmentServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/admin/departments/");
         } catch (Exception ex) {
             request.setAttribute("error", "Failed to create department. Please try again.");
-            request.getRequestDispatcher("/admin/departments/new.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/admin/departments/form.jsp").forward(request, response);
         }
 
+    }
+
+    private void updateDepartment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String departmentId = request.getParameter("departmentId");
+        String dName = request.getParameter("name");
+        String dDescription = request.getParameter("description");
+
+        Optional<Department> isDepExist = departmentService.getDepartment(departmentId);
+        if (isDepExist.isEmpty()) {
+            request.setAttribute("error", "Department not found!");
+            request.getRequestDispatcher("/WEB-INF/views/admin/departments/form.jsp").forward(request, response);
+            return;
+        }
+
+        if (dName == null || dName.trim().isEmpty() || dDescription == null || dDescription.trim().isEmpty()) {
+            request.setAttribute("error", "All fields are required! Please fill them in.");
+            request.getRequestDispatcher("/WEB-INF/views/admin/departments/form.jsp").forward(request, response);
+            return;
+        }
+
+        Department department = new Department(dName, dDescription);
+
+        try {
+            departmentService.updateDepartment(department);
+            response.sendRedirect(request.getContextPath() + "/admin/departments?success=created");
+        } catch (Exception ex) {
+            request.setAttribute("error", "Failed to update department!!");
+            request.getRequestDispatcher("/WEB-INF/views/admin/departments/form.jsp").forward(request, response);
+        }
     }
 
     private void deleteDepartment(HttpServletRequest request, HttpServletResponse response, String depId) throws ServletException, IOException {
@@ -90,9 +121,8 @@ public class DepartmentServlet extends HttpServlet {
                 departmentService.deleteDepartment(depId);
                 response.sendRedirect(request.getContextPath() + "/admin/departments/");
             }
-        } catch (Exception eex) {
+        } catch (Exception ex) {
             response.sendRedirect(request.getContextPath() + "/admin/departments/");
         }
-
     }
 }

@@ -3,6 +3,9 @@ package com.akdital.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "departments")
 public class Department {
@@ -18,6 +21,9 @@ public class Department {
     @Column(name = "description", nullable = false)
     @NotBlank(message = "Description name is required!")
     private String description;
+
+    @OneToMany(mappedBy = "department_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Doctor> doctors = new ArrayList<>();
 
     public Department() {}
 
@@ -48,6 +54,14 @@ public class Department {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
     }
 
     @Override

@@ -3,7 +3,7 @@
     String pageTitle = (String) request.getAttribute("pageTitle");
     if (pageTitle == null) pageTitle = "Dashboard";
 %>
-<header class="bg-white shadow-md p-6">
+<header class="bg-white shadow-md p-6 sticky top-0 left-0 z-50">
     <div class="flex justify-between items-center">
         <div>
             <h1 class="text-3xl font-bold text-gray-800"><%= pageTitle %></h1>

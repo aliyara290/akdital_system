@@ -77,12 +77,9 @@ public class RoomServlet extends HttpServlet {
     }
 
     private void showEditForm(HttpServletRequest req, HttpServletResponse resp, String roomId) throws ServletException, IOException {
-        Room room = roomService.getAllRooms().stream()
-                .filter(r -> r.getRoomId().equals(roomId))
-                .findFirst()
-                .orElse(null);
+        Optional<Room> room = roomService.getRoom(roomId);
 
-        if (room != null) {
+        if (room.isPresent()) {
             req.setAttribute("room", room);
             req.getRequestDispatcher("/WEB-INF/views/admin/rooms/form.jsp").forward(req, resp);
         } else {

@@ -11,9 +11,6 @@ import java.util.*;
 @Table(name = "patients")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Patient extends User {
-    @Column(name = "patient_id", unique = true)
-    private String patientId;
-
     @Column(name = "weight")
     @NotBlank(message = "Weight is required!")
     private Double weight;
@@ -24,7 +21,6 @@ public class Patient extends User {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Consultation> consultations;
-
 
     public Patient() {
     }
@@ -52,9 +48,6 @@ public class Patient extends User {
         this.height = height;
     }
 
-    public String getPatientId() {
-        return patientId;
-    }
 
     public Double getWeight() {
         return weight;
@@ -64,14 +57,9 @@ public class Patient extends User {
         this.weight = weight;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
-    }
-
     @Override
     public String toString() {
         return "Patient{" +super.toString()+
-                ", patientId='" + patientId + '\'' +
                 ", weight=" + weight +
                 ", height=" + height +
                 '}';

@@ -31,17 +31,17 @@ public class Consultation {
     private String raport;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patient")
     @NotBlank(message = "Patient id is required")
     private Patient patient;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "doctor")
     @NotBlank(message = "Doctor id is required")
     private Doctor doctor;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room")
     @NotBlank(message = "Room id is required")
     private Room room;
 
@@ -119,5 +119,20 @@ public class Consultation {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Consultation{" +
+                "consultationId='" + consultationId + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", consultationStatus=" + consultationStatus +
+                ", raport='" + raport + '\'' +
+                ", patient=" + patient +
+                ", doctor=" + doctor +
+                ", room=" + room +
+                '}';
     }
 }

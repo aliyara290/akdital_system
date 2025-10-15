@@ -12,29 +12,28 @@ import java.util.*;
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Doctor extends User {
 
-    @Column(name = "doctor_id", unique = true)
-    private String doctorId;
-
     @Column(name = "speciality")
     @NotBlank(message = "Speciality is required!")
     private String speciality;
 
-    @Column(name = "department_id")
-    @NotBlank(message = "Department is required!")
-    private String departmentId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "doctor_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Consultation> consultationList;
 
     public Doctor() {
     }
 
-    public Doctor(String email, String firstName, String lastName, String password, String phone, GenderType gender, String departmentId, String speciality) {
+    public Doctor(String email, String firstName, String lastName, String password, String phone,
+                  GenderType gender, Department department, String speciality) {
         super(email, firstName, lastName, password, phone, gender, UserType.DOCTOR);
         this.consultationList = new ArrayList<>();
-        this.departmentId = departmentId;
+        this.department = department;
         this.speciality = speciality;
     }
+
 
     public List<Consultation> getConsultationList() {
         return consultationList;
@@ -44,20 +43,12 @@ public class Doctor extends User {
         this.consultationList = consultationList;
     }
 
-    public String getDepartmentId() {
-        return departmentId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public String getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public String getSpeciality() {
@@ -66,5 +57,15 @@ public class Doctor extends User {
 
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "consultationList=" + consultationList +
+                ", speciality='" + speciality + '\'' +
+                ", department=" + department +
+                '}';
     }
 }

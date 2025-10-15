@@ -1,4 +1,11 @@
 package com.akdital.repository.interfaces;
 
-public interface DoctorRepository {
+import com.akdital.model.Consultation;
+import com.akdital.model.Doctor;
+
+import java.util.List;
+
+public interface DoctorRepository extends GenericRepository<Doctor> {
+    List<Doctor> getAllDoctors();
+    List<Consultation> getConsultations(String doctorId);
 }
