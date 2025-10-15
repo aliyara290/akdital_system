@@ -37,10 +37,8 @@ public class DoctorServlet extends HttpServlet {
         String action = req.getParameter("action");
 
         if ("create".equals(action)) {
-            // Handle create - redirect to list with success
             resp.sendRedirect(req.getContextPath() + "/admin/doctors/?success=created");
         } else if ("update".equals(action)) {
-            // Handle update - redirect to list with success
             resp.sendRedirect(req.getContextPath() + "/admin/doctors/?success=updated");
         }
     }
