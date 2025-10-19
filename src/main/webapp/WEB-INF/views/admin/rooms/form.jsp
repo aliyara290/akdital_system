@@ -2,8 +2,9 @@
 <%@ page import="java.util.Optional" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    String roomId = (String) request.getAttribute("roomId");
     Optional<Room> room = (Optional<Room>) request.getAttribute("room");
-    boolean isEdit = room.isPresent();
+    boolean isEdit = roomId != null && !roomId.isEmpty();
     String formTitle = isEdit ? "Edit Room" : "Add New Room";
 %>
 <!DOCTYPE html>
@@ -45,7 +46,7 @@
                                 </label>
                                 <input type="text"
                                        name="name"
-                                       value="<%= isEdit ? room.get().getName() : "" %>"
+                                       value="<%= isEdit ? room.get().getName() : "ROOM-N-" %>"
                                        required
                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                        placeholder="e.g., Room 101, Operating Theater A">

@@ -1,7 +1,9 @@
 package com.akdital.service.impl;
 
 import com.akdital.exception.*;
+import com.akdital.model.Department;
 import com.akdital.model.Doctor;
+import com.akdital.repository.interfaces.DepartmentRepository;
 import com.akdital.repository.interfaces.DoctorRepository;
 import com.akdital.service.interfaces.DoctorService;
 import org.mindrot.jbcrypt.BCrypt;

@@ -16,6 +16,9 @@ public class Room {
     @Column(name = "name", nullable = true)
     private String name;
 
+    @OneToOne(mappedBy = "room", cascade = CascadeType.ALL)
+    private Doctor doctor;
+
     private List<LocalDateTime> occupiedSlots;
 
     public Room() {
@@ -48,5 +51,23 @@ public class Room {
 
     public void setRoomId(String roomId) {
         this.roomId = roomId;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "doctor=" + doctor +
+                ", roomId='" + roomId + '\'' +
+                ", name='" + name + '\'' +
+                ", occupiedSlots=" + occupiedSlots +
+                '}';
     }
 }

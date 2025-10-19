@@ -1,4 +1,4 @@
-package com.akdital.servlet;
+package com.akdital.servlet.admin;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,13 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-@WebServlet
-public class HelloServlet extends HttpServlet {
+@WebServlet("/patient/dashboard")
+public class PatientDashboardServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.println("Hello");
+        req.getRequestDispatcher("/WEB-INF/views/patient/dashboard.jsp").forward(req, resp);
     }
 }

@@ -23,6 +23,7 @@ public class Consultation {
     @NotBlank(message = "Time is required!")
     private LocalTime time;
 
+
     @Enumerated(EnumType.STRING)
     @Column(name = "consultation_status", nullable = false)
     private ConsultationStatus consultationStatus;
@@ -120,7 +121,6 @@ public class Consultation {
     public void setTime(LocalTime time) {
         this.time = time;
     }
-
 
     @Override
     public String toString() {

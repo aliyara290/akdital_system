@@ -25,6 +25,7 @@
         <% request.setAttribute("pageTitle", "Patient Details"); %>
         <jsp:include page="../layout/header.jsp" />
 
+        <% if(!patient.isEmpty() && patient.isPresent()){ %>
         <div class="p-6">
             <div class="max-w-6xl mx-auto">
                 <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
@@ -139,6 +140,20 @@
                 </div>
             </div>
         </div>
+        <% } else { %>
+        <div class="p-20 flex justify-center items-center">
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                <i class="fas fa-exclamation-triangle text-5xl text-red-500 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Patient Not Found</h2>
+                <p class="text-gray-600 mb-4">The patient you are looking for does not exist.</p>
+                <a href="<%= request.getContextPath() %>/admin/patients/"
+                   class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                    Back to Patients
+                </a>
+            </div>
+        </div>
+        <% } %>
+
     </main>
 </div>
 </body>

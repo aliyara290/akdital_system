@@ -12,6 +12,8 @@
     <title><%= formTitle %> - Akidital System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body class="bg-gray-100">
 <div class="flex h-screen">
@@ -107,11 +109,12 @@
                                     <label class="block text-sm font-medium text-gray-700 mb-2">
                                         Time <span class="text-red-500">*</span>
                                     </label>
-                                    <input type="time"
+                                    <input type="text"
                                            name="time"
-                                           value="<%= isEdit ? "09:00" : "" %>"
+                                           value="<%= isEdit ? "09:00" : "select time" %>"
                                            required
-                                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                           id="timePicker"
+<%--                                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">--%>
                                 </div>
                             </div>
                         </div>
@@ -150,5 +153,17 @@
         </div>
     </main>
 </div>
+<script>
+    flatpickr("#timePicker", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true,
+        minuteIncrement: 30,
+        minTime: "09:00",
+        maxTime: "17:00",
+        defaultDate: "09:00"
+    });
+</script>
 </body>
 </html>

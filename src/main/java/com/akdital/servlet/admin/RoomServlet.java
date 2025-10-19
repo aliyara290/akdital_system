@@ -81,6 +81,7 @@ public class RoomServlet extends HttpServlet {
 
         if (room.isPresent()) {
             req.setAttribute("room", room);
+            req.setAttribute("roomId", roomId);
             req.getRequestDispatcher("/WEB-INF/views/admin/rooms/form.jsp").forward(req, resp);
         } else {
             resp.sendRedirect(req.getContextPath() + "/admin/rooms/?error=notfound");
@@ -105,13 +106,8 @@ public class RoomServlet extends HttpServlet {
 
     private void viewRoom(HttpServletRequest req, HttpServletResponse resp, String roomId) throws ServletException, IOException {
         Optional<Room> room = roomService.getRoom(roomId);
-
-        if (room.isPresent()) {
-            req.setAttribute("room", room);
-            req.getRequestDispatcher("/WEB-INF/views/admin/rooms/view.jsp").forward(req, resp);
-        } else {
-            resp.sendRedirect(req.getContextPath() + "/admin/rooms/?error=notfound");
-        }
+        req.setAttribute("room", room);
+        req.getRequestDispatcher("/WEB-INF/views/admin/rooms/view.jsp").forward(req, resp);
     }
 
     private void deleteRoom(HttpServletRequest req, HttpServletResponse resp, String roomId) throws IOException {
