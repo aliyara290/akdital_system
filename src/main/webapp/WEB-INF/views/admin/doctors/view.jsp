@@ -1,4 +1,8 @@
+<%@ page import="java.util.Optional" %>
+<%@ page import="javax.print.Doc" %>
+<%@ page import="com.akdital.model.Doctor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% Optional<Doctor> doctor = (Optional<Doctor>) request.getAttribute("doctor"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,15 +18,12 @@
     <% request.setAttribute("currentPage", "doctors"); %>
     <jsp:include page="../layout/sidebar.jsp" />
 
-    <!-- Main Content -->
     <main class="flex-1 overflow-y-auto">
-        <!-- Header -->
         <% request.setAttribute("pageTitle", "Doctor Details"); %>
         <jsp:include page="../layout/header.jsp" />
-
+        <% if(!doctor.isEmpty() && doctor.isPresent()){ %>
         <div class="p-6">
             <div class="max-w-6xl mx-auto">
-                <!-- Doctor Profile Card -->
                 <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
                     <div class="flex justify-between items-start mb-6">
                         <div class="flex items-center">
@@ -30,15 +31,15 @@
                                 <i class="fas fa-user-md text-5xl text-blue-600"></i>
                             </div>
                             <div>
-                                <h2 class="text-3xl font-bold text-gray-800">Dr. Smith Williams</h2>
-                                <p class="text-gray-600">Doctor ID: #D001</p>
+                                <h2 class="text-3xl font-bold text-gray-800">Dr. <%= doctor.get().getFirstName()%> <%= doctor.get().getLastName()%></h2>
+                                <p class="text-gray-600">ID: #<%= doctor.get().getUserId().substring(0, 8)%></p>
                                 <span class="inline-block mt-2 px-3 py-1 bg-blue-100 text-blue-800 text-sm font-semibold rounded-full">
-                                        Cardiology Specialist
+                                        <%= doctor.get().getSpeciality()%> Specialist
                                     </span>
                             </div>
                         </div>
                         <div class="flex gap-2">
-                            <a href="<%= request.getContextPath() %>/admin/doctors/edit/1"
+                            <a href="<%= request.getContextPath() %>/admin/doctors/edit/<%= doctor.get().getUserId()%>"
                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition-colors">
                                 <i class="fas fa-edit mr-2"></i>Edit
                             </a>
@@ -54,27 +55,26 @@
                             <p class="text-sm text-gray-600 mb-1">Email</p>
                             <p class="text-gray-900 font-medium">
                                 <i class="fas fa-envelope text-blue-600 mr-2"></i>
-                                smith.williams@hospital.com
+                                <%= doctor.get().getEmail()%>
                             </p>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-lg">
                             <p class="text-sm text-gray-600 mb-1">Department</p>
                             <p class="text-gray-900 font-medium">
                                 <i class="fas fa-building text-green-600 mr-2"></i>
-                                Cardiology
+                                <%= doctor.get().getDepartment().getName()%>
                             </p>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-lg">
                             <p class="text-sm text-gray-600 mb-1">Speciality</p>
                             <p class="text-gray-900 font-medium">
                                 <i class="fas fa-stethoscope text-purple-600 mr-2"></i>
-                                Cardiology Specialist
+                                <%= doctor.get().getSpeciality()%> Specialist
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Today's Schedule -->
                 <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-calendar-day text-blue-600 mr-2"></i>
@@ -114,8 +114,7 @@
                     </div>
                 </div>
 
-                <!-- Statistics -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <div class="flex items-center justify-between mb-2">
                             <p class="text-gray-600 text-sm">Total Patients</p>
@@ -146,19 +145,22 @@
                             3 completed
                         </p>
                     </div>
-                    <div class="bg-white rounded-lg shadow-lg p-6">
-                        <div class="flex items-center justify-between mb-2">
-                            <p class="text-gray-600 text-sm">Rating</p>
-                            <i class="fas fa-star text-yellow-500 text-2xl"></i>
-                        </div>
-                        <h4 class="text-3xl font-bold text-gray-800">4.8</h4>
-                        <p class="text-sm text-gray-600 mt-1">
-                            Based on 156 reviews
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
+        <% } else { %>
+        <div class="p-20 flex justify-center items-center">
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                <i class="fas fa-exclamation-triangle text-5xl text-red-500 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Doctor Not Found</h2>
+                <p class="text-gray-600 mb-4">The doctor you are looking for does not exist.</p>
+                <a href="<%= request.getContextPath() %>/admin/doctors/"
+                   class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                    Back to Doctors list!
+                </a>
+            </div>
+        </div>
+        <% } %>
     </main>
 </div>
 </body>

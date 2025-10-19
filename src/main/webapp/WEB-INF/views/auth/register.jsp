@@ -8,17 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-6">
-<div class="w-full max-w-2xl">
-    <div class="text-center mb-8">
-        <a href="<%= request.getContextPath() %>/" class="inline-block">
-            <i class="fas fa-hospital text-6xl text-blue-600 mb-4"></i>
-            <h1 class="text-3xl font-bold text-gray-800">Akdital System</h1>
-            <p class="text-gray-600 mt-2">Create your account</p>
-        </a>
-    </div>
-
-    <div class="bg-white rounded-2xl shadow-2xl p-8">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center">
+<div class="w-full grid grid-cols-1 md:grid-cols-2 items-center">
+    <div class="bg-white h-max rounded-2xl shadow-2xl p-8 mx-6">
         <form action="<%= request.getContextPath() %>/register" method="POST">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- First Name -->
@@ -52,7 +44,7 @@
 
                 <div class="mt-6">
                     <label for="email" class="block text-gray-700 font-semibold mb-2">
-                        <i class="fas fa-envelope text-blue-600 mr-2"></i>Email Address
+                    Email Address
                     </label>
                     <input type="email"
                            id="email"
@@ -65,7 +57,7 @@
                 <!-- Phone Number -->
                 <div class="mt-6">
                     <label for="phone" class="block text-gray-700 font-semibold mb-2">
-                        <i class="fas fa-phone text-blue-600 mr-2"></i>Phone Number
+                      Phone Number
                     </label>
                     <input type="tel"
                            id="phone"
@@ -73,6 +65,31 @@
                            required
                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                            placeholder="+212 6XX-XXXXXX">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mt-6">
+                    <label for="email" class="block text-gray-700 font-semibold mb-2">
+                     Height
+                    </label>
+                    <input type="number"
+                           id="height"
+                           name="height"
+                           required
+                           value="0"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"/>
+                </div>
+
+                <div class="mt-6">
+                    <label for="phone" class="block text-gray-700 font-semibold mb-2">
+                        Weight
+                    </label>
+                    <input type="number"
+                           id="weight"
+                           name="weight"
+                           required
+                           value="0"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"/>
                 </div>
             </div>
 
@@ -119,23 +136,10 @@
                     </div>
                 </div>
             </div>
-
-<%--            <!-- Date of Birth -->--%>
-<%--            <div class="mt-6">--%>
-<%--                <label for="dateOfBirth" class="block text-gray-700 font-semibold mb-2">--%>
-<%--                    <i class="fas fa-calendar text-blue-600 mr-2"></i>Date of Birth--%>
-<%--                </label>--%>
-<%--                <input type="date"--%>
-<%--                       id="dateOfBirth"--%>
-<%--                       name="dateOfBirth"--%>
-<%--                       required--%>
-<%--                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">--%>
-<%--            </div>--%>
-
             <!-- Gender -->
             <div class="mt-6">
                 <label class="block text-gray-700 font-semibold mb-2">
-                    <i class="fas fa-venus-mars text-blue-600 mr-2"></i>Gender
+                   Gender
                 </label>
                 <div class="flex gap-6">
                     <label class="flex items-center">
@@ -168,12 +172,11 @@
             </p>
         </div>
     </div>
-
-    <!-- Back to Home -->
-    <div class="text-center mt-6">
-        <a href="<%= request.getContextPath() %>/"
-           class="text-gray-600 hover:text-gray-800 flex items-center justify-center">
-            <i class="fas fa-arrow-left mr-2"></i>Back to Home
+    <div class="text-center mb-8 h-screen w-full flex items-center justify-center bg-white p-10">
+        <a href="<%= request.getContextPath() %>/" class="inline-block">
+            <i class="fas fa-hospital text-6xl text-blue-600 mb-4"></i>
+            <h1 class="text-3xl font-bold text-gray-800">Akdital System</h1>
+            <p class="text-gray-600 mt-2">Create your account</p>
         </a>
     </div>
 </div>

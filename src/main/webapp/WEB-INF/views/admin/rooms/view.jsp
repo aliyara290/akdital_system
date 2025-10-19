@@ -3,6 +3,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Optional<Room> room = (Optional<Room>) request.getAttribute("room");
+    if (room == null || room.isEmpty()) {
+        room = Optional.empty();
+    }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,19 +18,16 @@
 </head>
 <body class="bg-gray-100">
 <div class="flex h-screen">
-    <!-- Sidebar -->
     <% request.setAttribute("currentPage", "rooms"); %>
     <jsp:include page="../layout/sidebar.jsp" />
 
-    <!-- Main Content -->
     <main class="flex-1 overflow-y-auto">
-        <!-- Header -->
         <% request.setAttribute("pageTitle", "Room Details"); %>
         <jsp:include page="../layout/header.jsp" />
 
+        <% if(!room.isEmpty() && room.isPresent()){ %>
         <div class="p-6">
             <div class="max-w-4xl mx-auto">
-                <!-- Room Details Card -->
                 <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
                     <div class="flex justify-between items-start mb-6">
                         <div class="flex items-center">
@@ -77,14 +77,12 @@
                     </div>
                 </div>
 
-                <!-- Today's Schedule -->
                 <div class="bg-white rounded-lg shadow-lg p-8">
                     <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-calendar-day text-blue-600 mr-2"></i>
                         Today's Schedule
                     </h3>
                     <div class="space-y-3">
-                        <!-- Static schedule data -->
                         <div class="flex items-center justify-between p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
                             <div>
                                 <p class="font-medium text-gray-800">Dr. Smith Williams - John Doe</p>
@@ -115,6 +113,19 @@
                 </div>
             </div>
         </div>
+        <% } else { %>
+        <div class="p-20 flex justify-center items-center">
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                <i class="fas fa-exclamation-triangle text-5xl text-red-500 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Room Not Found</h2>
+                <p class="text-gray-600 mb-4">The room you are looking for does not exist.</p>
+                <a href="<%= request.getContextPath() %>/admin/rooms/"
+                   class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                    Back to Rooms
+                </a>
+            </div>
+        </div>
+        <% } %>
     </main>
 </div>
 </body>

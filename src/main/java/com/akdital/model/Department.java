@@ -22,7 +22,7 @@ public class Department {
     @NotBlank(message = "Description name is required!")
     private String description;
 
-    @OneToMany(mappedBy = "department_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Doctor> doctors = new ArrayList<>();
 
     public Department() {}

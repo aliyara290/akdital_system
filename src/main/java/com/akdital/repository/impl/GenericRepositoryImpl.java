@@ -115,29 +115,6 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
             JPAUtil.close(em);
         }
     }
-//
-//    @Override
-//    public List<T> getAll() {
-//        EntityManager em = JPAUtil.getEntityManager();
-//        EntityTransaction tx = em.getTransaction();
-//        try {
-//            tx.begin();
-//            T entity = em
-//            if (entity != null) {
-//                tx.commit();
-//                return List.of(entity);
-//            }
-//            tx.rollback();
-//            return  Collections.emptyList();
-//        } catch (Exception ex) {
-//            if (tx.isActive()) {
-//                tx.rollback();
-//            }
-//            throw new RuntimeException("Error finding entity", ex);
-//        } finally {
-//            JPAUtil.close(em);
-//        }
-//    }
 }
 
 

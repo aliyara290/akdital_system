@@ -111,7 +111,7 @@
                                    class="flex-1 bg-green-50 hover:bg-green-100 text-green-600 px-4 py-2 rounded-lg text-center transition-colors text-sm font-medium">
                                     <i class="fas fa-edit mr-1"></i>Edit
                                 </a>
-                                <button onclick="confirmDelete('<%= department.getDepartmentId() %>', 'Cardiology')"
+                                <button onclick="confirmDelete('<%= department.getDepartmentId() %>', <%= department.getName() %>)"
                                         class="flex-1 bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg transition-colors text-sm font-medium">
                                     <i class="fas fa-trash mr-1"></i>Delete
                                 </button>

@@ -29,4 +29,6 @@ public class DoctorRepositoryImpl extends GenericRepositoryImpl<Doctor> implemen
     public List<Consultation> getConsultations(String doctorId) {
         return List.of();
     }
+
+
 }

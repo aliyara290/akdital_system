@@ -66,22 +66,20 @@
                                 Available
                             </span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2"><%= room.getName() %>
+                    <h3 class="text-xl font-bold text-gray-800 mb-5"><%= room.getName() %>
                     </h3>
                     <div class="flex gap-2">
                         <a href="<%= request.getContextPath() %>/admin/rooms/view/<%= room.getRoomId() %>"
-                           class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded-lg transition-colors text-sm">
-                            <i class="fas fa-eye"></i> View
+                           class="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg text-center transition-colors text-sm font-medium">
+                            <i class="fas fa-eye mr-1"></i>View
                         </a>
                         <a href="<%= request.getContextPath() %>/admin/rooms/edit/<%= room.getRoomId() %>"
-                           class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white text-center py-2 rounded-lg transition-colors text-sm">
-                            <i class="fas fa-edit"></i> Edit
+                           class="flex-1 bg-green-50 hover:bg-green-100 text-green-600 px-4 py-2 rounded-lg text-center transition-colors text-sm font-medium">
+                            <i class="fas fa-edit mr-1"></i>Edit
                         </a>
-                        <a href="<%= request.getContextPath() %>/admin/rooms/delete/<%= room.getRoomId() %>"
-                           onclick="return confirm('Are you sure?')"
-                           class="px-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors text-sm flex items-center flex-column justify-center">
-                            <i class="fas fa-trash"></i>
-                        </a>
+                        <button onclick="confirmDelete('<%= room.getRoomId() %>', '<%= room.getName() %>')" class="flex-1 bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg transition-colors text-sm font-medium">
+                            <i class="fas fa-trash mr-1"></i>Delete
+                        </button>
                     </div>
                 </div>
                 <%
@@ -102,5 +100,59 @@
         </div>
     </main>
 </div>
+
+<div class="deleteModal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+        <div class="text-center">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Delete Room</h3>
+            <p class="text-gray-600 mb-6">
+                Are you sure you want to delete <strong class="roomName"></strong>?
+                This action cannot be undone.
+            </p>
+            <div class="flex gap-4">
+                <button onclick="closeDeleteModal()"
+                        class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg transition-colors">
+                    Cancel
+                </button>
+                <button onclick="deleteDepartment()"
+                        class="flex-1 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-colors">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let departmentToDelete = null;
+
+    function confirmDelete(id, name) {
+        departmentToDelete = id;
+        document.querySelector('.roomName').textContent = name;
+        document.querySelector('.deleteModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        document.querySelector('.deleteModal').classList.add('hidden');
+        departmentToDelete = null;
+    }
+
+    function deleteDepartment() {
+        if (departmentToDelete) {
+            window.location.href = '<%= request.getContextPath() %>/admin/rooms/delete/' + departmentToDelete;
+        } else {
+            console.log("helllo")
+        }
+    }
+
+    document.querySelector('.deleteModal').addEventListener('click', function (e) {
+        if (e.target === this) {
+            closeDeleteModal();
+        }
+    });
+</script>
 </body>
 </html>

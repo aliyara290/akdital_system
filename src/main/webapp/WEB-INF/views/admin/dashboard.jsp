@@ -88,22 +88,22 @@
                 </h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <a href="<%= request.getContextPath() %>/admin/patients/new"
-                       class="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:shadow-lg transition-all hover:scale-105">
+                       class="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:shadow-lg transition-all">
                         <i class="fas fa-user-plus text-4xl text-blue-600 mb-3"></i>
                         <span class="text-gray-700 font-medium">Add Patient</span>
                     </a>
                     <a href="<%= request.getContextPath() %>/admin/doctors/new"
-                       class="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-lg hover:shadow-lg transition-all hover:scale-105">
+                       class="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-lg hover:shadow-lg transition-all">
                         <i class="fas fa-stethoscope text-4xl text-green-600 mb-3"></i>
                         <span class="text-gray-700 font-medium">Add Doctor</span>
                     </a>
                     <a href="<%= request.getContextPath() %>/admin/rooms/new"
-                       class="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg hover:shadow-lg transition-all hover:scale-105">
+                       class="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg hover:shadow-lg transition-all">
                         <i class="fas fa-door-closed text-4xl text-purple-600 mb-3"></i>
                         <span class="text-gray-700 font-medium">Add Room</span>
                     </a>
                     <a href="<%= request.getContextPath() %>/admin/consultations/new"
-                       class="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg hover:shadow-lg transition-all hover:scale-105">
+                       class="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg hover:shadow-lg transition-all">
                         <i class="fas fa-calendar-plus text-4xl text-orange-600 mb-3"></i>
                         <span class="text-gray-700 font-medium">Schedule</span>
                     </a>

@@ -51,7 +51,6 @@
             </div>
             <% } %>
 
-            <!-- Patients Table -->
             <% if (patients != null && !patients.isEmpty()) {%>
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -124,11 +123,11 @@
                                class="text-yellow-600 hover:text-yellow-900 mr-3" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="<%= request.getContextPath() %>/admin/patients/delete/<%= patient.getUserId()%>"
-                               onclick="return confirm('Are you sure?')"
+                            <button
+                                    onclick="confirmDelete('<%= patient.getUserId() %>','<%= patient.getFirstName() %> <%= patient.getLastName() %>')"
                                class="text-red-600 hover:text-red-900" title="Delete">
                                 <i class="fas fa-trash"></i>
-                            </a>
+                            </button>
                         </td>
                     </tr>
                     <%} %>
@@ -170,5 +169,57 @@
         </div>
     </main>
 </div>
+
+<div class="deleteModal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+        <div class="text-center">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Delete Patient</h3>
+            <p class="text-gray-600 mb-6">
+                Are you sure you want to delete <strong class="patientName"></strong>?
+                This action cannot be undone.
+            </p>
+            <div class="flex gap-4">
+                <button onclick="closeDeleteModal()"
+                        class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg transition-colors">
+                    Cancel
+                </button>
+                <button onclick="deleteDepartment()"
+                        class="flex-1 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-colors">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let departmentToDelete = null;
+
+    function confirmDelete(id, name) {
+        departmentToDelete = id;
+        document.querySelector('.patientName').textContent = name;
+        document.querySelector('.deleteModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        document.querySelector('.deleteModal').classList.add('hidden');
+        departmentToDelete = null;
+    }
+
+    function deleteDepartment() {
+        if (departmentToDelete) {
+            window.location.href = '<%= request.getContextPath() %>/admin/patients/delete/' + departmentToDelete;
+        }
+    }
+
+    document.querySelector('.deleteModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeDeleteModal();
+        }
+    });
+</script>
 </body>
 </html>

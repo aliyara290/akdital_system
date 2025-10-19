@@ -1,5 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="true" %>
+<%@ page import="com.akdital.model.Department" %>
+<%@ page import="java.util.Optional" %>
+<%
+    Optional<Department> department = (Optional<Department>) request.getAttribute("department");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,19 +15,16 @@
 </head>
 <body class="bg-gray-100">
 <div class="flex h-screen">
-    <!-- Sidebar -->
     <% request.setAttribute("currentPage", "departments"); %>
     <jsp:include page="../layout/sidebar.jsp" />
 
-    <!-- Main Content -->
     <main class="flex-1 overflow-y-auto">
-        <!-- Header -->
         <% request.setAttribute("pageTitle", "Department Details"); %>
         <jsp:include page="../layout/header.jsp" />
 
+        <% if (department != null && department.isPresent()) { %>
         <div class="p-6">
             <div class="max-w-6xl mx-auto">
-
                 <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg p-8 text-white mb-6">
                     <div class="flex justify-between items-start">
                         <div class="flex items-center">
@@ -31,15 +32,15 @@
                                 <i class="fas fa-heartbeat text-5xl"></i>
                             </div>
                             <div>
-                                <h2 class="text-4xl font-bold mb-2"><c:out value="${department.get().getName()}" /></h2>
-                                <p class="text-blue-100"><c:out value="${department.get().getDescription()}" /></p>
+                                <h2 class="text-4xl font-bold mb-2"><%= department.get().getName() %></h2>
+                                <p class="text-blue-100"><%= department.get().getDescription() %></p>
                                 <span class="inline-block mt-2 bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
-                                        Department ID: #<c:out value="${department.get().getDepartmentId().substring(0, 8)}" />
-                                    </span>
+                                    Department ID: #<%= department.get().getDepartmentId().substring(0, 8) %>
+                                </span>
                             </div>
                         </div>
                         <div class="flex gap-2">
-                            <a href="<%= request.getContextPath() %>/admin/departments/edit/<c:out value="${department.get().getDepartmentId()}" />"
+                            <a href="<%= request.getContextPath() %>/admin/departments/edit/<%= department.get().getDepartmentId() %>"
                                class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded-lg transition-colors">
                                 <i class="fas fa-edit mr-2"></i>Edit
                             </a>
@@ -133,6 +134,19 @@
                 </div>
             </div>
         </div>
+        <% } else { %>
+        <div class="p-20 flex justify-center items-center">
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                <i class="fas fa-exclamation-triangle text-5xl text-red-500 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Department Not Found</h2>
+                <p class="text-gray-600 mb-4">The department you are looking for does not exist.</p>
+                <a href="<%= request.getContextPath() %>/admin/departments/"
+                   class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                    Back to Departments
+                </a>
+            </div>
+        </div>
+        <% } %>
     </main>
 </div>
 </body>

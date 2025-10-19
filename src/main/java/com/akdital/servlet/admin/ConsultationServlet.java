@@ -1,5 +1,6 @@
 package com.akdital.servlet.admin;
 
+import com.akdital.model.enums.ConsultationStatus;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,6 +36,7 @@ public class ConsultationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        ConsultationStatus.valueOf("CANCELED");
 
         if ("create".equals(action)) {
             resp.sendRedirect(req.getContextPath() + "/admin/consultations/?success=created");
