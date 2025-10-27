@@ -49,8 +49,7 @@ public class ConsultationServlet extends HttpServlet {
         String pathInfo = req.getPathInfo();
 
         if (pathInfo == null || pathInfo.equals("/")) {
-            req.getRequestDispatcher("/WEB-INF/views/patient/consultations/list.jsp").forward(req, resp);
-
+            listConsultations(req, resp);
         } else if (pathInfo.equals("/new")) {
             req.setAttribute("departments", departmentService.getAllDepartments());
             req.getRequestDispatcher("/WEB-INF/views/patient/consultations/form.jsp").forward(req, resp);
@@ -128,5 +127,12 @@ public class ConsultationServlet extends HttpServlet {
     private List<Doctor> getDoctorsByDepId(String depId) {
         if (depId == null || depId.isEmpty()) return List.of();
         return consultationService.getDoctorsByDepartmentId(depId);
+    }
+
+    private void listConsultations(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Consultation> consultations = consultationService.getAllConsultations();
+        req.setAttribute("consultations", consultations);
+        req.getRequestDispatcher("/WEB-INF/views/patient/consultations/list.jsp").forward(req, resp);
+
     }
 }

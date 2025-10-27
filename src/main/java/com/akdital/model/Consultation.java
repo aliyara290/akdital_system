@@ -31,17 +31,17 @@ public class Consultation {
     @Column(name = "raport", nullable = true)
     private String raport;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient")
     @NotBlank(message = "Patient id is required")
     private Patient patient;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor")
     @NotBlank(message = "Doctor id is required")
     private Doctor doctor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room")
     @NotBlank(message = "Room id is required")
     private Room room;
