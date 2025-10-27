@@ -31,44 +31,44 @@
                     </div>
                 </div>
 
-                <!-- Total Doctors -->
-                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm uppercase">Total Doctors</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">18</h3>
-                        </div>
-                        <div class="bg-green-100 rounded-full p-4">
-                            <i class="fas fa-user-md text-3xl text-green-600"></i>
-                        </div>
-                    </div>
-                </div>
+<%--                <!-- Total Doctors -->--%>
+<%--                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">--%>
+<%--                    <div class="flex items-center justify-between">--%>
+<%--                        <div>--%>
+<%--                            <p class="text-gray-600 text-sm uppercase">Total Doctors</p>--%>
+<%--                            <h3 class="text-3xl font-bold text-gray-800 mt-2">18</h3>--%>
+<%--                        </div>--%>
+<%--                        <div class="bg-green-100 rounded-full p-4">--%>
+<%--                            <i class="fas fa-user-md text-3xl text-green-600"></i>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <!-- Total Rooms -->
-                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm uppercase">Total Rooms</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">32</h3>
-                        </div>
-                        <div class="bg-purple-100 rounded-full p-4">
-                            <i class="fas fa-door-open text-3xl text-purple-600"></i>
-                        </div>
-                    </div>
-                </div>
+<%--                <!-- Total Rooms -->--%>
+<%--                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">--%>
+<%--                    <div class="flex items-center justify-between">--%>
+<%--                        <div>--%>
+<%--                            <p class="text-gray-600 text-sm uppercase">Total Rooms</p>--%>
+<%--                            <h3 class="text-3xl font-bold text-gray-800 mt-2">32</h3>--%>
+<%--                        </div>--%>
+<%--                        <div class="bg-purple-100 rounded-full p-4">--%>
+<%--                            <i class="fas fa-door-open text-3xl text-purple-600"></i>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <!-- Total Consultations -->
-                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-600 text-sm uppercase">Consultations</p>
-                            <h3 class="text-3xl font-bold text-gray-800 mt-2">127</h3>
-                        </div>
-                        <div class="bg-orange-100 rounded-full p-4">
-                            <i class="fas fa-calendar-check text-3xl text-orange-600"></i>
-                        </div>
-                    </div>
-                </div>
+<%--                <!-- Total Consultations -->--%>
+<%--                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">--%>
+<%--                    <div class="flex items-center justify-between">--%>
+<%--                        <div>--%>
+<%--                            <p class="text-gray-600 text-sm uppercase">Consultations</p>--%>
+<%--                            <h3 class="text-3xl font-bold text-gray-800 mt-2">127</h3>--%>
+<%--                        </div>--%>
+<%--                        <div class="bg-orange-100 rounded-full p-4">--%>
+<%--                            <i class="fas fa-calendar-check text-3xl text-orange-600"></i>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">

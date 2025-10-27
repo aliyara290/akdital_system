@@ -9,7 +9,6 @@ import com.akdital.service.interfaces.DoctorService;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.*;
-
 public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorRepository doctorRepository;
