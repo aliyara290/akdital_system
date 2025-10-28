@@ -100,6 +100,8 @@ public class ConsultationServlet extends HttpServlet {
         } else if ("update".equals(action)) {
             bookConsultation(req, resp);
             resp.sendRedirect(req.getContextPath() + "/patient/consultations/?success=updated");
+        } else if ("cancel".equals(action)) {
+            cancelConsultation(req, resp);
         }
     }
 
@@ -134,5 +136,22 @@ public class ConsultationServlet extends HttpServlet {
         req.setAttribute("consultations", consultations);
         req.getRequestDispatcher("/WEB-INF/views/patient/consultations/list.jsp").forward(req, resp);
 
+    }
+
+
+    private void cancelConsultation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String consultationId = req.getParameter("consultationId");
+
+        try {
+            boolean cancelled = consultationService.cancelConsultation(consultationId);
+
+            if (cancelled) {
+                resp.sendRedirect(req.getContextPath() + "/patient/consultations/?success=cancelled");
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/patient/consultations/?error=notfound");
+            }
+        } catch (Exception ex) {
+            resp.sendRedirect(req.getContextPath() + "/patient/consultations/?error=" + ex.getMessage());
+        }
     }
 }

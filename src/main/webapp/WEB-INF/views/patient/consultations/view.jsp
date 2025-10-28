@@ -10,19 +10,15 @@
 </head>
 <body class="bg-gray-100">
 <div class="flex h-screen">
-    <!-- Sidebar -->
     <% request.setAttribute("currentPage", "consultations"); %>
     <jsp:include page="../layout/sidebar.jsp" />
 
-    <!-- Main Content -->
     <main class="flex-1 overflow-y-auto">
-        <!-- Header -->
         <% request.setAttribute("pageTitle", "Consultation Details"); %>
         <jsp:include page="../layout/header.jsp" />
 
         <div class="p-6">
             <div class="max-w-6xl mx-auto">
-                <!-- Consultation Header -->
                 <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
                     <div class="flex justify-between items-start mb-6">
                         <div>
@@ -48,7 +44,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                    <!-- Patient Info -->
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
                             <i class="fas fa-user text-blue-600 mr-2"></i>
@@ -75,7 +70,6 @@
                         </div>
                     </div>
 
-                    <!-- Doctor Info -->
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
                             <i class="fas fa-user-md text-green-600 mr-2"></i>
@@ -102,7 +96,6 @@
                         </div>
                     </div>
 
-                    <!-- Room Info -->
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
                             <i class="fas fa-door-open text-purple-600 mr-2"></i>
@@ -128,7 +121,6 @@
                     </div>
                 </div>
 
-                <!-- Medical Report -->
                 <div class="bg-white rounded-lg shadow-lg p-8">
                     <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-file-medical text-red-600 mr-2"></i>
@@ -159,7 +151,6 @@
                         </div>
                     </div>
 
-                    <!-- Consultation Timeline -->
                     <div class="mt-6">
                         <h4 class="font-bold text-gray-800 mb-4">Consultation Timeline</h4>
                         <div class="space-y-4">
