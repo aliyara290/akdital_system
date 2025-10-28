@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,14 @@
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center">
 <div class="w-full grid grid-cols-1 md:grid-cols-2 items-center">
     <div class="bg-white h-max rounded-2xl shadow-2xl p-8 mx-6">
+        <!-- Error Message -->
+        <c:if test="${error != null}">
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded">
+                <p class="font-bold">Error!</p>
+                <p class="text-sm">${error}</p>
+            </div>
+        </c:if>
+
         <form action="<%= request.getContextPath() %>/register" method="POST">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- First Name -->
@@ -41,10 +50,9 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
                 <div class="mt-6">
                     <label for="email" class="block text-gray-700 font-semibold mb-2">
-                    Email Address
+                        Email Address
                     </label>
                     <input type="email"
                            id="email"
@@ -57,7 +65,7 @@
                 <!-- Phone Number -->
                 <div class="mt-6">
                     <label for="phone" class="block text-gray-700 font-semibold mb-2">
-                      Phone Number
+                        Phone Number
                     </label>
                     <input type="tel"
                            id="phone"
@@ -67,29 +75,36 @@
                            placeholder="+212 6XX-XXXXXX">
                 </div>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="mt-6">
-                    <label for="email" class="block text-gray-700 font-semibold mb-2">
-                     Height
+                    <label for="height" class="block text-gray-700 font-semibold mb-2">
+                        Height (cm)
                     </label>
                     <input type="number"
                            id="height"
                            name="height"
                            required
-                           value="0"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"/>
+                           min="50"
+                           max="250"
+                           step="0.1"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                           placeholder="175"/>
                 </div>
 
                 <div class="mt-6">
-                    <label for="phone" class="block text-gray-700 font-semibold mb-2">
-                        Weight
+                    <label for="weight" class="block text-gray-700 font-semibold mb-2">
+                        Weight (kg)
                     </label>
                     <input type="number"
                            id="weight"
                            name="weight"
                            required
-                           value="0"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"/>
+                           min="20"
+                           max="300"
+                           step="0.1"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                           placeholder="70"/>
                 </div>
             </div>
 
@@ -136,10 +151,11 @@
                     </div>
                 </div>
             </div>
+
             <!-- Gender -->
             <div class="mt-6">
                 <label class="block text-gray-700 font-semibold mb-2">
-                   Gender
+                    Gender
                 </label>
                 <div class="flex gap-6">
                     <label class="flex items-center">
@@ -172,6 +188,7 @@
             </p>
         </div>
     </div>
+
     <div class="text-center mb-8 h-screen w-full flex items-center justify-center bg-white p-10">
         <a href="<%= request.getContextPath() %>/" class="inline-block">
             <i class="fas fa-hospital text-6xl text-blue-600 mb-4"></i>
@@ -208,4 +225,3 @@
     });
 </script>
 </body>
-</html>

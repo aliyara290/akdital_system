@@ -16,7 +16,7 @@
             <i class="fas fa-chart-line w-5"></i>
             <span class="ml-3">Dashboard</span>
         </a>
-        <a href="<%= request.getContextPath() %>/patient/consultations/"
+        <a href="<%= request.getContextPath() %>/doctor/consultations/"
            class="flex items-center px-6 py-3 <%= "patients".equals(currentPage) ? "bg-blue-700 border-l-4 border-white" : "hover:bg-blue-700 transition-colors border-l-4 border-transparent hover:border-white" %>">
             <i class="fas fa-users w-5"></i>
             <span class="ml-3">Consultations</span>

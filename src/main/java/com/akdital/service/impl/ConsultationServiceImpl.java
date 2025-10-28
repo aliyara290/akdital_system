@@ -5,6 +5,7 @@ import com.akdital.exception.DateNotAvailableException;
 import com.akdital.exception.NoRecordsFound;
 import com.akdital.model.Consultation;
 import com.akdital.model.Doctor;
+import com.akdital.model.enums.ConsultationStatus;
 import com.akdital.repository.interfaces.ConsultationRepository;
 import com.akdital.service.interfaces.ConsultationService;
 
@@ -25,23 +26,43 @@ public class ConsultationServiceImpl implements ConsultationService {
     @Override
     public Consultation bookConsultation(Consultation consultation) {
         if(isDoctorAvailable(consultation.getDoctor(), consultation.getDate(), consultation.getTime())) {
-            return null;
+            throw new DateNotAvailableException();
         }
         try {
             return consultationRepository.save(consultation);
         } catch(Exception ex) {
-            throw new NoRecordsFound("");
+            throw new DataInsertionException("Failed to book consultation");
         }
     }
 
     @Override
     public Consultation updateConsultation(Consultation consultation) {
-        return null;
+        try {
+            return consultationRepository.update(consultation);
+        } catch (Exception ex) {
+            throw new RuntimeException("Failed to update consultation", ex);
+        }
     }
 
     @Override
-    public Boolean updateConsultationStatus(String status) {
-        return null;
+    public Boolean updateConsultationStatus(String consultationId, ConsultationStatus status) {
+        try {
+            Optional<Consultation> consultationOpt = consultationRepository.findById(consultationId);
+            if (consultationOpt.isPresent()) {
+                Consultation consultation = consultationOpt.get();
+                consultation.setConsultationStatus(status);
+                consultationRepository.update(consultation);
+                return true;
+            }
+            return false;
+        } catch (Exception ex) {
+            throw new RuntimeException("Failed to update consultation status", ex);
+        }
+    }
+
+    @Override
+    public Boolean cancelConsultation(String consultationId) {
+        return updateConsultationStatus(consultationId, ConsultationStatus.CANCELLED);
     }
 
     @Override
@@ -85,6 +106,7 @@ public class ConsultationServiceImpl implements ConsultationService {
         return List.of();
     }
 
+    @Override
     public List<LocalTime> getAvailableTimes(String doctorId, LocalDate date) {
         List<LocalTime> allTimes = List.of(
                 LocalTime.of(9, 0),
@@ -107,8 +129,6 @@ public class ConsultationServiceImpl implements ConsultationService {
         for (Consultation c : booked) {
             available.remove(c.getTime());
         }
-        System.out.println(available);
         return available;
     }
-
 }

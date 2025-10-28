@@ -31,11 +31,11 @@
             <i class="fas fa-door-open w-5"></i>
             <span class="ml-3">Rooms</span>
         </a>
-        <a href="<%= request.getContextPath() %>/admin/consultations/"
-           class="flex items-center px-6 py-3 <%= "consultations".equals(currentPage) ? "bg-blue-700 border-l-4 border-white" : "hover:bg-blue-700 transition-colors border-l-4 border-transparent hover:border-white" %>">
-            <i class="fas fa-calendar-check w-5"></i>
-            <span class="ml-3">Consultations</span>
-        </a>
+<%--        <a href="<%= request.getContextPath() %>/admin/consultations/"--%>
+<%--           class="flex items-center px-6 py-3 <%= "consultations".equals(currentPage) ? "bg-blue-700 border-l-4 border-white" : "hover:bg-blue-700 transition-colors border-l-4 border-transparent hover:border-white" %>">--%>
+<%--            <i class="fas fa-calendar-check w-5"></i>--%>
+<%--            <span class="ml-3">Consultations</span>--%>
+<%--        </a>--%>
         <a href="<%= request.getContextPath() %>/admin/departments/"
            class="flex items-center px-6 py-3 <%= "departments".equals(currentPage) ? "bg-blue-700 border-l-4 border-white" : "hover:bg-blue-700 transition-colors border-l-4 border-transparent hover:border-white" %>">
             <i class="fas fa-building w-5"></i>

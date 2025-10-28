@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,22 @@
     </div>
 
     <div class="bg-white rounded-2xl shadow-2xl p-8">
+        <!-- Success Message -->
+        <c:if test="${param.registered == 'success'}">
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded">
+                <p class="font-bold">Registration Successful!</p>
+                <p class="text-sm">You can now login with your credentials.</p>
+            </div>
+        </c:if>
+
+        <!-- Error Message -->
+        <c:if test="${error != null}">
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded">
+                <p class="font-bold">Error!</p>
+                <p class="text-sm">${error}</p>
+            </div>
+        </c:if>
+
         <form action="<%= request.getContextPath() %>/login" method="POST">
             <div class="mb-6">
                 <label for="email" class="block text-gray-700 font-semibold mb-2">
